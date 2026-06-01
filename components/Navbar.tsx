@@ -1,7 +1,12 @@
 import Link from 'next/link';
-import { QrCode, ScanLine, LayoutDashboard, Crown } from 'lucide-react';
+import { QrCode, ScanLine, LayoutDashboard, Crown, LogOut } from 'lucide-react';
+import { createClient } from '@/lib/supabase/server';
+import { logout } from '@/app/login/actions';
 
-export default function Navbar() {
+export default async function Navbar() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
   return (
     <nav className="bg-slate-900/80 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -11,29 +16,53 @@ export default function Navbar() {
               <Crown className="h-8 w-8 text-[#d4af37] group-hover:scale-110 transition-transform duration-300" />
               <span className="font-playfair font-bold text-2xl tracking-wide text-white">Buku Tamu</span>
             </Link>
-            <div className="hidden sm:ml-10 sm:flex sm:space-x-8">
+            
+            {user && (
+              <div className="hidden sm:ml-10 sm:flex sm:space-x-8">
+                <Link
+                  href="/generate"
+                  className="border-transparent text-slate-300 hover:border-[#d4af37] hover:text-[#d4af37] inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-all duration-300"
+                >
+                  <QrCode className="w-4 h-4 mr-2" />
+                  Generate QR
+                </Link>
+                <Link
+                  href="/scan"
+                  className="border-transparent text-slate-300 hover:border-[#d4af37] hover:text-[#d4af37] inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-all duration-300"
+                >
+                  <ScanLine className="w-4 h-4 mr-2" />
+                  Scan QR
+                </Link>
+                <Link
+                  href="/dashboard"
+                  className="border-transparent text-slate-300 hover:border-[#d4af37] hover:text-[#d4af37] inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-all duration-300"
+                >
+                  <LayoutDashboard className="w-4 h-4 mr-2" />
+                  Dashboard
+                </Link>
+              </div>
+            )}
+          </div>
+          
+          <div className="flex items-center">
+            {user ? (
+              <form action={logout}>
+                <button
+                  type="submit"
+                  className="flex items-center px-4 py-2 border border-slate-700 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition-colors"
+                >
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Logout
+                </button>
+              </form>
+            ) : (
               <Link
-                href="/generate"
-                className="border-transparent text-slate-300 hover:border-[#d4af37] hover:text-[#d4af37] inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-all duration-300"
+                href="/login"
+                className="flex items-center px-4 py-2 bg-[#d4af37] border border-transparent rounded-lg text-sm font-bold text-slate-900 hover:bg-[#ebd074] transition-colors uppercase tracking-wider"
               >
-                <QrCode className="w-4 h-4 mr-2" />
-                Generate QR
+                Login
               </Link>
-              <Link
-                href="/scan"
-                className="border-transparent text-slate-300 hover:border-[#d4af37] hover:text-[#d4af37] inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-all duration-300"
-              >
-                <ScanLine className="w-4 h-4 mr-2" />
-                Scan QR
-              </Link>
-              <Link
-                href="/dashboard"
-                className="border-transparent text-slate-300 hover:border-[#d4af37] hover:text-[#d4af37] inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-all duration-300"
-              >
-                <LayoutDashboard className="w-4 h-4 mr-2" />
-                Dashboard
-              </Link>
-            </div>
+            )}
           </div>
         </div>
       </div>
