@@ -48,7 +48,7 @@ export default function Home() {
             </div>
             <h3 className="font-playfair text-2xl font-bold text-white mb-4 tracking-wide">Executive Dashboard</h3>
             <p className="text-slate-400 font-light leading-relaxed">
-              Pantau laporan kehadiran secara real-time melalui dashboard.
+              Pantau laporan kehadiran Tamu secara real-time melalui dashboard.
             </p>
           </div>
         </Link>
