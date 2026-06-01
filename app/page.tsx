@@ -24,7 +24,7 @@ export default function Home() {
             </div>
             <h3 className="font-playfair text-2xl font-bold text-white mb-4 tracking-wide">Generate QR</h3>
             <p className="text-slate-400 font-light leading-relaxed">
-              Ciptakan akses QR Code unik dan berkelas untuk setiap tamu undangan kehormatan Anda.
+              Generate QR Code untuk setiap tamu undangan.
             </p>
           </div>
         </Link>
@@ -36,7 +36,7 @@ export default function Home() {
             </div>
             <h3 className="font-playfair text-2xl font-bold text-white mb-4 tracking-wide">Scan QR</h3>
             <p className="text-slate-400 font-light leading-relaxed">
-              Validasi kehadiran tamu undangan secara instan melalui pemindaian presisi tinggi.
+              Validasi kehadiran tamu undangan anda secara instan dengan pemindaian QR Code.
             </p>
           </div>
         </Link>
@@ -48,7 +48,7 @@ export default function Home() {
             </div>
             <h3 className="font-playfair text-2xl font-bold text-white mb-4 tracking-wide">Executive Dashboard</h3>
             <p className="text-slate-400 font-light leading-relaxed">
-              Pantau laporan analitik kehadiran secara real-time melalui dasbor eksekutif premium.
+              Pantau laporan kehadiran secara real-time melalui dashboard.
             </p>
           </div>
         </Link>
